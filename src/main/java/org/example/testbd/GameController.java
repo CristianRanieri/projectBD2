@@ -105,9 +105,6 @@ public class GameController {
         return gameRepository.findByMatchHistory(id);
     }
 
-
-
-
     @PostMapping("/UpdateGame")
     public ResponseEntity<String> updateGame(
             @RequestParam("matchHistory") String matchHistory,

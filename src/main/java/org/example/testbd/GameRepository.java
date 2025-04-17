@@ -12,7 +12,6 @@ public interface GameRepository extends MongoRepository<Game, String> {
     @Query
     List<Game> findByYearAndRedTeamTag(int year, String redTeamTag);
 
-
     @Query("{$or: [ " +
             "{ 'blueTeamTag': ?0, 'bResult': 1 }, " +
             "{ 'redTeamTag': ?0, 'rResult': 1 } " +

@@ -158,40 +158,6 @@
                 alert("Errore nel recupero dei dati.");
                 console.error(err);
             });
-
-/*
-        function updateGame(matchHistory) {
-            const updatedData = {};
-
-            fields.forEach(field => {
-                const input = document.querySelector(`[name="${field}"]`);
-                if (input && !input.disabled) {
-                    updatedData[field] = input.value;
-                } else if (field === "matchHistory") {
-                    updatedData[field] = matchHistory;
-                }
-            });
-
-            fetch("http://localhost:8080/games/update", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(updatedData)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Game aggiornato con successo!");
-                    } else {
-                        throw new Error("Errore durante l'aggiornamento");
-                    }
-                })
-                .catch(error => {
-                    console.error("Errore:", error);
-                    alert("Errore durante l'aggiornamento.");
-                });
-        }
- */
     }
 </script>
 
