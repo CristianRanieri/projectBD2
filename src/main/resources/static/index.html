@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Game Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-section {
+            margin-bottom: 20px;
+        }
+
+        #fixedButtons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        #fixedButtons button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #fixedButtons button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- 🔘 Bottoni fissi in alto a sinistra -->
+<div id="fixedButtons">
+    <button onclick="window.location.href='insert.html'">Insert Game</button>
+    <button onclick="window.location.href='join.html'">Join</button>
+</div>
+
+<div class="container">
+    <h1>Games Data</h1>
+
+    <!-- 🔍 Ricerca per anno e red team -->
+    <div class="search-section">
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year">
+        <label for="redTeamTag">Red Team Tag:</label>
+        <input type="text" id="redTeamTag" name="redTeamTag">
+        <button onclick="getGames()">Search Games</button>
+    </div>
+
+    <!-- 🏆 Ricerca per team vincente -->
+    <div class="search-section">
+        <label for="winTeamTag">Team Tag (Vittorie):</label>
+        <input type="text" id="winTeamTag" name="winTeamTag">
+        <button onclick="getWins()">Search Wins</button>
+    </div>
+
+    <h2>Game Results</h2>
+    <table id="gamesTable">
+        <thead>
+        <tr>
+            <th>Match History</th>
+            <th>Year</th>
+            <th>Red Team Tag</th>
+            <th>Blue Team Tag</th>
+            <th>bResult</th>
+            <th>rResult</th>
+            <th>Action</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    var typeReserch;
+
+    function getGames() {
+        //ricerca tramite 1
+        typeReserch = 1;
+
+        const year = document.getElementById('year').value;
+        const redTeamTag = document.getElementById('redTeamTag').value;
+
+        fetch(`http://localhost:8080/games/TagTeamYear?year=${year}&redTeamTag=${redTeamTag}`)
+            .then(response => response.json())
+            .then(games => renderGames(games))
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function getWins() {
+        typeReserch = 2;
+
+        const teamTag = document.getElementById('winTeamTag').value;
+
+        fetch(`http://localhost:8080/games/TagTeamWins?teamTag=${teamTag}`)
+            .then(response => response.json())
+            .then(games => renderGames(games))
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function renderGames(games) {
+        const tableBody = document.querySelector("#gamesTable tbody");
+        tableBody.innerHTML = "";
+
+        games.forEach(game => {
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${game.matchHistory}</td>
+                <td>${game.year}</td>
+                <td>${game.redTeamTag}</td>
+                <td>${game.blueTeamTag}</td>
+                <td>${game.bResult}</td>
+                <td>${game.rResult}</td>
+                <td>
+                    <button onclick="deleteGame('${game.matchHistory}')">Delete</button>
+                </td>
+                <td>
+                    <a href="edit.html?id=${game.matchHistory}"><button>Edit</button></a>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    function deleteGame(fullId) {
+        fetch(`http://localhost:8080/games/DeleteGame`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({fullId})
+        })
+            .then(() => {
+                alert('Game deleted!');
+
+                if(typeReserch == 1){
+                    getGames();  // Refresh with the original search (optional)
+                }else {
+                    getWins();
+                }
+
+
+            })
+            .catch(error => console.error('Error deleting game:', error));
+    }
+</script>
+</body>
+</html>

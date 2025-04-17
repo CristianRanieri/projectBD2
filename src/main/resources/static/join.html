@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Result</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Games with Bans (First 10)</h1>
+<table id="joinTable">
+    <thead>
+    <tr>
+        <th>Match History</th>
+        <th>Year</th>
+        <th>Red Team Tag</th>
+        <th>Blue Team Tag</th>
+        <th>bResult</th>
+        <th>rResult</th>
+        <th>Team Color</th>
+        <th>Ban 1</th>
+        <th>Ban 2</th>
+        <th>Ban 3</th>
+        <th>Ban 4</th>
+        <th>Ban 5</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+    fetch("http://localhost:8080/games/Joined")
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.querySelector("#joinTable tbody");
+            data.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                        <td>${item.matchHistory}</td>
+                        <td>${item.year}</td>
+                        <td>${item.redTeamTag}</td>
+                        <td>${item.blueTeamTag}</td>
+                        <td>${item.bResult}</td>
+                        <td>${item.rResult}</td>
+                        <td>${item.teamColor}</td>
+                        <td>${item.ban_1}</td>
+                        <td>${item.ban_2}</td>
+                        <td>${item.ban_3}</td>
+                        <td>${item.ban_4}</td>
+                        <td>${item.ban_5}</td>
+                    `;
+                tbody.appendChild(row);
+            });
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Fa sì che l'altezza della pagina copra tutto lo schermo */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column; /* Imposta la disposizione in colonna */
+            flex-grow: 1; /* Fa sì che il form occupi tutto lo spazio disponibile */
+        }
+
+        .columns-wrapper {
+            display: flex;
+            justify-content: space-between; /* Dispone le colonne orizzontalmente */
+            gap: 20px; /* Aggiunge un po' di spazio tra le colonne */
+            flex-grow: 1; /* Fa sì che le colonne occupino lo spazio disponibile */
+        }
+
+        .column {
+            flex: 1; /* Ogni colonna occupa metà dello spazio disponibile */
+            min-width: 300px;
+        }
+
+        .field-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        /* Stile per il div che contiene il bottone */
+        .submit-btn-container {
+            display: flex;
+            justify-content: center; /* Centra orizzontalmente */
+            margin-top: 20px; /* Spazio sopra il bottone */
+        }
+    </style>
+</head>
+<body>
+<h1>Insert Game</h1>
+
+<form id="insertGameForm" action="/games/UpdateGame" method="post"></form>
+
+<script>
+    window.onload = () => {
+        const fields = [
+            "matchHistory", "league", "season", "year",
+            "blueTeamTag", "bResult", "rResult", "redTeamTag",
+            "gamelength", "blueTop", "blueTopChamp", "blueJungle", "blueJungleChamp", "blueMiddle",
+            "blueMiddleChamp", "blueADC", "blueADCChamp", "blueSupport", "blueSupportChamp",
+            "redTop", "redTopChamp", "redJungle", "redJungleChamp", "redMiddle", "redMiddleChamp",
+            "redADC", "redADCChamp", "redSupport", "redSupportChamp"
+        ];
+
+
+        const col1 = document.createElement("div");
+        const col2 = document.createElement("div");
+        col1.className = "column";
+        col2.className = "column";
+
+        fields.forEach((field, index) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "field-group";
+
+            const label = document.createElement("label");
+            label.textContent = field;
+
+            const input = document.createElement("input");
+            input.name = field;
+
+            wrapper.appendChild(label);
+            wrapper.appendChild(input);
+
+            if (index < fields.length / 2) {
+                col1.appendChild(wrapper);
+            } else {
+                col2.appendChild(wrapper);
+            }
+        });
+
+        // Aggiungi le colonne al form
+        const columnsWrapper = document.createElement("div");
+        columnsWrapper.className = "columns-wrapper";
+        columnsWrapper.appendChild(col1);
+        columnsWrapper.appendChild(col2);
+        form.appendChild(columnsWrapper);
+
+        // Crea il bottone di invio
+        const submitBtn = document.createElement("button");
+        submitBtn.textContent = "Insert";
+        submitBtn.type = "submit";
+
+        // Crea il div che conterrà il bottone
+        const DivSubmitBtn = document.createElement("div");
+        DivSubmitBtn.className = "submit-btn-container"; // Usa la classe CSS
+
+        // Aggiungi il bottone al div
+        DivSubmitBtn.appendChild(submitBtn);
+
+        // Aggiungi il div al form
+        form.appendChild(DivSubmitBtn);
+    }
+</script>
+
+<script>
+    const form = document.getElementById("insertGameForm");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // blocca il submit normale
+
+        const formData = new FormData(form);
+
+        fetch("/games/UpdateGame", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect alla home
+                    window.location.href = "/index.html"; // cambia con l'URL della tua home
+                } else {
+                    alert("Errore durante l'inserimento");
+                }
+            });
+    });
+</script>
+
+</body>
+</html>

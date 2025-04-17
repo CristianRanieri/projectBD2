@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Fa sì che l'altezza della pagina copra tutto lo schermo */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column; /* Imposta la disposizione in colonna */
+            flex-grow: 1; /* Fa sì che il form occupi tutto lo spazio disponibile */
+        }
+
+        .columns-wrapper {
+            display: flex;
+            justify-content: space-between; /* Dispone le colonne orizzontalmente */
+            gap: 20px; /* Aggiunge un po' di spazio tra le colonne */
+            flex-grow: 1; /* Fa sì che le colonne occupino lo spazio disponibile */
+        }
+
+        .column {
+            flex: 1; /* Ogni colonna occupa metà dello spazio disponibile */
+            min-width: 300px;
+        }
+
+        .field-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        /* Stile per il div che contiene il bottone */
+        .submit-btn-container {
+            display: flex;
+            justify-content: center; /* Centra orizzontalmente */
+            margin-top: 20px; /* Spazio sopra il bottone */
+        }
+    </style>
+</head>
+<body>
+<h1>Edit Game</h1>
+
+<form id="editGameForm" action="/games/UpdateGame" method="post"></form>
+
+<script>
+    window.onload = () => {
+        const fields = [
+            "matchHistory", "league", "season", "year",
+            "blueTeamTag", "bResult", "rResult", "redTeamTag",
+            "gamelength", "blueTop", "blueTopChamp", "blueJungle", "blueJungleChamp", "blueMiddle",
+            "blueMiddleChamp", "blueADC", "blueADCChamp", "blueSupport", "blueSupportChamp",
+            "redTop", "redTopChamp", "redJungle", "redJungleChamp", "redMiddle", "redMiddleChamp",
+            "redADC", "redADCChamp", "redSupport", "redSupportChamp"
+        ];
+
+        const form = document.getElementById("editGameForm");
+
+        const rawId = new URLSearchParams(window.location.search).get("id");
+
+        // Recupera l'ancora (tutto dopo il #)
+        const hash = window.location.hash ? window.location.hash.substring(1) : ''; // rimuove il '#' iniziale
+
+        // Combina ID e l'ancora, se desiderato
+        const id = rawId || ''; // In questo caso, id è quello della query string
+        const fullId = id + (hash ? `#${hash}` : ''); // Combina l'ID e l'ancora se presente
+
+        console.log("fullid: " + fullId);
+
+        // Ora 'fullId' contiene l'ID completo con l'ancora
+        fetch("http://localhost:8080/games/GetGame", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({fullId})
+        })
+            .then(response => response.json())
+            .then(game => {
+                const col1 = document.createElement("div");
+                const col2 = document.createElement("div");
+                col1.className = "column";
+                col2.className = "column";
+
+                fields.forEach((field, index) => {
+                    const wrapper = document.createElement("div");
+                    wrapper.className = "field-group";
+
+                    const label = document.createElement("label");
+                    label.textContent = field;
+
+                    const input = document.createElement("input");
+                    input.name = field;
+                    input.value = game[field] ?? "";
+
+                    if (field === "matchHistory") {
+                        input.readOnly = true;
+                    }
+
+                    wrapper.appendChild(label);
+                    wrapper.appendChild(input);
+
+                    if (index < fields.length / 2) {
+                        col1.appendChild(wrapper);
+                    } else {
+                        col2.appendChild(wrapper);
+                    }
+                });
+
+                // Aggiungi le colonne al form
+                const columnsWrapper = document.createElement("div");
+                columnsWrapper.className = "columns-wrapper";
+                columnsWrapper.appendChild(col1);
+                columnsWrapper.appendChild(col2);
+                form.appendChild(columnsWrapper);
+
+                // Crea il bottone di invio
+                const submitBtn = document.createElement("button");
+                submitBtn.textContent = "Update";
+                submitBtn.type = "submit";
+                //submitBtn.onclick = () => updateGame(game.matchHistory);
+
+                // Crea il div che conterrà il bottone
+                const DivSubmitBtn = document.createElement("div");
+                DivSubmitBtn.className = "submit-btn-container"; // Usa la classe CSS
+
+                // Aggiungi il bottone al div
+                DivSubmitBtn.appendChild(submitBtn);
+
+                // Aggiungi il div al form
+                form.appendChild(DivSubmitBtn);
+            })
+            .catch(err => {
+                alert("Errore nel recupero dei dati.");
+                console.error(err);
+            });
+
+/*
+        function updateGame(matchHistory) {
+            const updatedData = {};
+
+            fields.forEach(field => {
+                const input = document.querySelector(`[name="${field}"]`);
+                if (input && !input.disabled) {
+                    updatedData[field] = input.value;
+                } else if (field === "matchHistory") {
+                    updatedData[field] = matchHistory;
+                }
+            });
+
+            fetch("http://localhost:8080/games/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Game aggiornato con successo!");
+                    } else {
+                        throw new Error("Errore durante l'aggiornamento");
+                    }
+                })
+                .catch(error => {
+                    console.error("Errore:", error);
+                    alert("Errore durante l'aggiornamento.");
+                });
+        }
+ */
+    }
+</script>
+
+<script>
+    const form = document.getElementById("editGameForm");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // blocca il submit normale
+
+        const formData = new FormData(form);
+
+        fetch("/games/UpdateGame", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect alla home
+                    window.location.href = "/index.html"; // cambia con l'URL della tua home
+                } else {
+                    alert("Errore durante l'aggiornamento");
+                }
+            });
+    });
+</script>
+
+</body>
+</html>
