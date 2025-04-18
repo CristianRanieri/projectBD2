@@ -1,0 +1,207 @@
+/* style.css - Tema Dark con tonalitÃƒÂ  di viola */
+
+:root {
+    --color-primary: #6A0DAD;
+    --color-secondary: #9B30FF;
+    --color-accent: #9B30FF;
+    --color-hover: #4B0082;
+    --color-background: #121212;
+    --color-surface: #1e1e1e;
+    --color-text: #e0e0e0;
+    --color-border: #444;
+    --color-input-bg: #2a2a2a;
+    --color-input-border: #444;
+
+    /* Per i bottoni Insert/Join */
+    --color-fixed-button: #6A0DAD;
+    --color-fixed-hover: #4B0082;
+
+    /* Per la tabella */
+    --color-table-header-bg: #1e1e1e;  /* Colore viola scuro per l'intestazione */
+    --color-table-header-text: #fff;  /* Colore bianco per il testo dell'intestazione */
+    --color-table-row-bg-even: #2a2a2a;  /* Colore di sfondo per le righe pari */
+    --color-table-row-bg-odd: #333;  /* Colore di sfondo per le righe dispari */
+}
+
+/* Tabella */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+table, th, td {
+    border: 1px solid var(--color-border);
+}
+
+th {
+    padding: 10px;
+    text-align: left;
+    background-color: var(--color-table-header-bg);
+    color: var(--color-table-header-text);
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Alternanza colori per le righe della tabella */
+tr:nth-child(even) {
+    background-color: var(--color-table-row-bg-even);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-table-row-bg-odd);
+}
+
+
+
+body {
+    font-family: 'Poppins', sans-serif;  /* Usa Poppins, se non disponibile, usa sans-serif */
+    margin: 20px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--color-hover);
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 6px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+    background-color: var(--color-input-bg);
+    color: var(--color-text);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    background-color: #222;
+}
+
+label {
+    margin-right: 10px;
+}
+
+#fixedButtons {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#fixedButtons button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: var(--color-fixed-button);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#fixedButtons button:hover {
+    background-color: var(--color-fixed-hover);
+}
+
+a button {
+    background-color: var(--color-accent);
+}
+
+a button:hover {
+    background-color: var(--color-hover);
+}
+
+/* Stile per gli input */
+input {
+    padding: 6px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+    background-color: var(--color-input-bg);  /* Sfondo scuro per gli input */
+    color: var(--color-text);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Stile quando l'input Ã¨ in focus */
+input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    background-color: var(--color-input-bg);  /* Resta scuro */
+    box-shadow: 0 0 5px var(--color-secondary); /* Aggiungi ombra di focus */
+}
+
+/* Effetto hover per quando il cursore passa sopra */
+input:hover {
+    background-color: #444;  /* Colore piÃ¹ chiaro per l'hover */
+}
+
+
+/* Stile per i bottoni */
+button {
+    margin-top: 10px;
+    padding: 9px;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;  /* Cambia il font qui */
+    transition: background-color 0.3s ease;
+}
+
+/* Quando il bottone Ã¨ hoverato */
+button:hover {
+    background-color: var(--color-hover);
+}
+
+/* Bottoni fissi "Insert Game" e "Join" */
+#fixedButtons button {
+    padding: 9px 15px;
+    margin-right: 10px;
+    background-color: var(--color-fixed-button);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;  /* Cambia il font qui per i bottoni fissi */
+    transition: background-color 0.3s ease;
+}
+
+#fixedButtons button:hover {
+    background-color: var(--color-fixed-hover);
+}
+
+/* Bottoni nei link (per esempio "Edit") */
+a button {
+    background-color: var(--color-accent);
+    font-family: 'Poppins', sans-serif;  /* Cambia anche per i bottoni nei link */
+}
+
+a button:hover {
+    background-color: var(--color-hover);
+}

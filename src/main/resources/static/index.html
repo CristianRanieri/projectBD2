@@ -4,56 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MongoDB Game Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .search-section {
-            margin-bottom: 20px;
-        }
-
-        #fixedButtons {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-
-        #fixedButtons button {
-            padding: 10px 15px;
-            margin-right: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #fixedButtons button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="styleIndex.css">
+    <!-- Aggiungi il link al font che desideri utilizzare -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -78,7 +31,7 @@
 
     <!-- Ricerca per team vincente -->
     <div class="search-section">
-        <label for="winTeamTag">Team Tag (Vittorie):</label>
+        <label for="winTeamTag">Team Tag (Wins):</label>
         <input type="text" id="winTeamTag" name="winTeamTag">
         <button onclick="getWins()">Search Wins</button>
     </div>
