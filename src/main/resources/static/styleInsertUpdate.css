@@ -1,0 +1,103 @@
+/* Aggiungere il tema personalizzato per la pagina */
+
+/* Per la pagina di Insert Game */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: auto;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    max-width: 1000px;
+    margin-top: 30px;
+}
+
+/* Intestazione con il titolo e il link "Ritorna alla home" */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.return-home {
+    font-size: 16px;
+    color: #dcdcdc;  /* Grigio chiaro */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.return-home:hover {
+    color: var(--color-hover);  /* Colore viola scuro quando hoverato */
+}
+
+/* Form e layout delle colonne */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.columns-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.column {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 25px;
+}
+
+.field-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-input-bg);
+    color: var(--color-text);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    background-color: var(--color-input-bg);
+    box-shadow: 0 0 5px var(--color-secondary);
+}
+
+/* Bottone di invio */
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 9px 40px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+    transition: background-color 0.3s ease;
+    margin-top: 0px;
+}
+
+button:hover {
+    background-color: var(--color-hover);
+}
