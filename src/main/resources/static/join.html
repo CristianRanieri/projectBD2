@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Join Result</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="styleIndex.css"> <!-- Link al file CSS con il tema personalizzato -->
+    <link rel="stylesheet" href="styleJoin.css">
 </head>
 <body>
-<h1>Games with Bans (First 10)</h1>
+
+<div class="header">
+    <h1>Games with Bans (First 50)</h1>
+    <a href="index.html" class="return-home">Ritorna alla home</a> <!-- Link aggiunto -->
+</div>
+
 <table id="joinTable">
     <thead>
     <tr>
@@ -44,19 +41,19 @@
             data.forEach(item => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                        <td>${item.matchHistory}</td>
-                        <td>${item.year}</td>
-                        <td>${item.redTeamTag}</td>
-                        <td>${item.blueTeamTag}</td>
-                        <td>${item.bResult}</td>
-                        <td>${item.rResult}</td>
-                        <td>${item.teamColor}</td>
-                        <td>${item.ban_1}</td>
-                        <td>${item.ban_2}</td>
-                        <td>${item.ban_3}</td>
-                        <td>${item.ban_4}</td>
-                        <td>${item.ban_5}</td>
-                    `;
+                            <td>${item.matchHistory}</td>
+                            <td>${item.year}</td>
+                            <td>${item.redTeamTag}</td>
+                            <td>${item.blueTeamTag}</td>
+                            <td>${item.bResult}</td>
+                            <td>${item.rResult}</td>
+                            <td>${item.teamColor}</td>
+                            <td>${item.ban_1}</td>
+                            <td>${item.ban_2}</td>
+                            <td>${item.ban_3}</td>
+                            <td>${item.ban_4}</td>
+                            <td>${item.ban_5}</td>
+                        `;
                 tbody.appendChild(row);
             });
         });

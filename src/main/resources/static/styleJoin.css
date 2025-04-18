@@ -1,0 +1,18 @@
+/* Stile per il link "Ritorna alla home" */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.return-home {
+    font-size: 16px;
+    color: #dcdcdc;  /* Grigio chiaro */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.return-home:hover {
+    color: var(--color-primary);  /* Colore viola scuro quando hoverato */
+}
