@@ -34,16 +34,16 @@ public class Game {
     private String blueTeamTag;
 
     @Field("bResult")
-    private String bResult;
+    private int bResult;
 
     @Field("rResult")
-    private String rResult;
+    private int rResult;
 
     @Field("redTeamTag")
     private String redTeamTag;
 
     @Field("gamelength")
-    private String gamelength;
+    private int gamelength;
 
     @Field("blueTop")
     private String blueTop;
@@ -182,21 +182,6 @@ public class Game {
         this.blueTeamTag = blueTeamTag;
     }
 
-    public String getbResult() {
-        return bResult;
-    }
-
-    public void setbResult(String bResult) {
-        this.bResult = bResult;
-    }
-
-    public String getrResult() {
-        return rResult;
-    }
-
-    public void setrResult(String rResult) {
-        this.rResult = rResult;
-    }
 
     public String getRedTeamTag() {
         return redTeamTag;
@@ -206,11 +191,27 @@ public class Game {
         this.redTeamTag = redTeamTag;
     }
 
-    public String getGamelength() {
+    public int getbResult() {
+        return bResult;
+    }
+
+    public void setbResult(int bResult) {
+        this.bResult = bResult;
+    }
+
+    public int getrResult() {
+        return rResult;
+    }
+
+    public void setrResult(int rResult) {
+        this.rResult = rResult;
+    }
+
+    public int getGamelength() {
         return gamelength;
     }
 
-    public void setGamelength(String gamelength) {
+    public void setGamelength(int gamelength) {
         this.gamelength = gamelength;
     }
 

@@ -156,11 +156,11 @@ public class GameController {
 
         updatedGame.setYear(Integer.parseInt(year));
         updatedGame.setBlueTeamTag(blueTeamTag);
-        updatedGame.setbResult(bResult);
+        updatedGame.setbResult(Integer.parseInt(bResult));
 
-        updatedGame.setrResult(rResult);
+        updatedGame.setrResult(Integer.parseInt(rResult));
         updatedGame.setRedTeamTag(redTeamTag);
-        updatedGame.setGamelength(gamelength);
+        updatedGame.setGamelength(Integer.parseInt(gamelength));
 
         updatedGame.setBlueTop(blueTop);
         updatedGame.setBlueTopChamp(blueTopChamp);
