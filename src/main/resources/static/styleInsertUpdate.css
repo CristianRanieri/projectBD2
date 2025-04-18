@@ -31,7 +31,7 @@ body {
 }
 
 .return-home:hover {
-    color: var(--color-hover);  /* Colore viola scuro quando hoverato */
+    color: var(--color-primary);  /* Colore viola scuro quando hoverato */
 }
 
 /* Form e layout delle colonne */

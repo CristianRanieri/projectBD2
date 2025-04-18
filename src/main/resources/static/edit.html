@@ -3,67 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Fa sì che l'altezza della pagina copra tutto lo schermo */
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column; /* Imposta la disposizione in colonna */
-            flex-grow: 1; /* Fa sì che il form occupi tutto lo spazio disponibile */
-        }
-
-        .columns-wrapper {
-            display: flex;
-            justify-content: space-between; /* Dispone le colonne orizzontalmente */
-            gap: 20px; /* Aggiunge un po' di spazio tra le colonne */
-            flex-grow: 1; /* Fa sì che le colonne occupino lo spazio disponibile */
-        }
-
-        .column {
-            flex: 1; /* Ogni colonna occupa metà dello spazio disponibile */
-            min-width: 300px;
-        }
-
-        .field-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input {
-            width: 100%;
-            padding: 6px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-
-        /* Stile per il div che contiene il bottone */
-        .submit-btn-container {
-            display: flex;
-            justify-content: center; /* Centra orizzontalmente */
-            margin-top: 20px; /* Spazio sopra il bottone */
-        }
-    </style>
+    <link rel="stylesheet" href="styleIndex.css">
+    <link rel="stylesheet" href="styleInsertUpdate.css">
+    <link rel="stylesheet" href="styleJoin.css">
 </head>
 <body>
-<h1>Edit Game</h1>
+<div class="header">
+    <h1>Update Game</h1>
+    <a href="index.html" class="return-home">Ritorna alla home</a>
+</div>
+
 
 <form id="editGameForm" action="/games/UpdateGame" method="post"></form>
 
